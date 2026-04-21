@@ -99,20 +99,21 @@ const RiskResult = () => {
       </div>
 
       <button 
-        onClick={() => navigate('/dashboard')}
+        onClick={() => navigate('/')}
         style={{
           background: '#7F77DD',
           color: 'white',
           border: 'none',
-          borderRadius: '8px',
-          padding: '12px',
-          fontSize: '15px',
-          fontWeight: '600',
+          borderRadius: '12px',
+          padding: '16px',
+          fontSize: '16px',
+          fontWeight: 'bold',
           width: '100%',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          boxShadow: '0 4px 12px rgba(127, 119, 221, 0.2)'
         }}
       >
-        View dashboard →
+        View Health Dashboard →
       </button>
     </div>
   );

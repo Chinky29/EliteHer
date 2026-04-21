@@ -22,17 +22,18 @@ const App = () => {
         <Toaster position="top-center" />
         
         <div style={{
-          maxWidth: '680px',
+          maxWidth: '800px',
           margin: '0 auto',
           backgroundColor: '#fff',
           minHeight: '100vh',
-          boxShadow: '0 0 10px rgba(0,0,0,0.02)'
+          boxShadow: '0 0 20px rgba(0,0,0,0.05)'
         }}>
           <Navbar />
           
           <main>
             <Routes>
-              <Route path="/" element={<LogCycle />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/log" element={<LogCycle />} />
               <Route path="/result" element={<RiskResult />} />
               <Route path="/dashboard" element={<Dashboard />} />
             </Routes>

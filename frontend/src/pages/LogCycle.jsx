@@ -80,66 +80,73 @@ const LogCycle = () => {
     }
   };
 
-  const inputGroupStyle = { marginBottom: '15px' };
-  const labelStyle = { display: 'block', fontSize: '14px', marginBottom: '5px', color: '#555', fontWeight: '500' };
-  const inputStyle = { width: '100%', padding: '10px 12px', border: '0.5px solid #ddd', borderRadius: '8px', fontSize: '14px', boxSizing: 'border-box' };
+  const inputGroupStyle = { marginBottom: '20px' };
+  const labelStyle = { display: 'block', fontSize: '13px', marginBottom: '8px', color: '#666', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' };
+  const inputStyle = { width: '100%', padding: '12px 14px', border: '1px solid #eee', borderRadius: '10px', fontSize: '15px', boxSizing: 'border-box', backgroundColor: '#fcfcfc', transition: '0.2s' };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <div style={{ backgroundColor: '#fff', borderRadius: '12px', border: '0.5px solid #e8e8e8', padding: '24px' }}>
-        <h2 style={{ marginTop: 0, marginBottom: '20px', color: '#333' }}>Log Your Cycle</h2>
-        
+    <div style={{ padding: '24px' }}>
+      <div style={{ marginBottom: '24px' }}>
+        <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#333', margin: '0 0 8px 0' }}>Log New Cycle</h1>
+        <p style={{ fontSize: '14px', color: '#666', margin: 0 }}>Keep track of your symptoms to get more accurate risk predictions.</p>
+      </div>
+
+      <div style={{ backgroundColor: '#fff', borderRadius: '16px', border: '0.5px solid #e8e8e8', padding: '32px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
         <form onSubmit={handleSubmit}>
-          <div style={inputGroupStyle}>
-            <label style={labelStyle}>Period start date</label>
-            <input type="date" name="start_date" required style={inputStyle} onChange={handleChange} />
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+            <div style={{ marginBottom: 0 }}>
+              <label style={labelStyle}>Start Date</label>
+              <input type="date" name="start_date" required style={inputStyle} onChange={handleChange} />
+            </div>
+            <div style={{ marginBottom: 0 }}>
+              <label style={labelStyle}>End Date</label>
+              <input type="date" name="end_date" required style={inputStyle} onChange={handleChange} />
+            </div>
           </div>
 
           <div style={inputGroupStyle}>
-            <label style={labelStyle}>Period end date</label>
-            <input type="date" name="end_date" required style={inputStyle} onChange={handleChange} />
-          </div>
-
-          <div style={inputGroupStyle}>
-            <label style={labelStyle}>Previous start date — <span style={{ fontWeight: 'normal', color: '#888' }}>helps predict your next cycle</span></label>
+            <label style={labelStyle}>Previous Period Start — <span style={{ fontWeight: 'normal', color: '#999', textTransform: 'none' }}>Required for gap calculation</span></label>
             <input type="date" name="prev_start" style={inputStyle} onChange={handleChange} />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+          <div style={{ height: '1px', backgroundColor: '#f0f0f0', margin: '32px 0' }}></div>
+          <h4 style={{ margin: '0 0 20px 0', color: '#333', fontSize: '16px' }}>Symptom Tracking</h4>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
             <div style={inputGroupStyle}>
-              <label style={labelStyle}>Flow (1=light, 4=heavy)</label>
+              <label style={labelStyle}>Flow Intensity (1-4)</label>
               <input type="number" name="flow_intensity" min="1" max="4" style={inputStyle} onChange={handleChange} value={formData.flow_intensity} />
             </div>
             <div style={inputGroupStyle}>
-              <label style={labelStyle}>Age</label>
+              <label style={labelStyle}>Your Age</label>
               <input type="number" name="age" required style={inputStyle} onChange={handleChange} />
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
             <div style={inputGroupStyle}>
-              <label style={labelStyle}>Acne score (0-10)</label>
+              <label style={labelStyle}>Acne Score (0-10)</label>
               <input type="number" name="acne_score" min="0" max="10" style={inputStyle} onChange={handleChange} value={formData.acne_score} />
             </div>
             <div style={inputGroupStyle}>
-              <label style={labelStyle}>Stress level (0-10)</label>
+              <label style={labelStyle}>Stress Level (0-10)</label>
               <input type="number" name="stress_level" min="0" max="10" style={inputStyle} onChange={handleChange} value={formData.stress_level} />
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
             <div style={inputGroupStyle}>
-              <label style={labelStyle}>Mood swings (0-10)</label>
+              <label style={labelStyle}>Mood Swings (0-10)</label>
               <input type="number" name="mood_swings" min="0" max="10" style={inputStyle} onChange={handleChange} value={formData.mood_swings} />
             </div>
             <div style={inputGroupStyle}>
-              <label style={labelStyle}>Hair loss (0-5)</label>
+              <label style={labelStyle}>Hair Loss (0-5)</label>
               <input type="number" name="hair_loss" min="0" max="5" style={inputStyle} onChange={handleChange} value={formData.hair_loss} />
             </div>
           </div>
 
           <div style={inputGroupStyle}>
-            <label style={labelStyle}>Weight gain in kg (last 6 months)</label>
+            <label style={labelStyle}>Weight Gain (Last 6 months in kg)</label>
             <input type="number" name="weight_gain" min="0" max="15" step="0.1" style={inputStyle} onChange={handleChange} value={formData.weight_gain} />
           </div>
 
@@ -150,17 +157,18 @@ const LogCycle = () => {
               background: '#7F77DD',
               color: 'white',
               border: 'none',
-              borderRadius: '8px',
-              padding: '12px',
-              fontSize: '15px',
-              fontWeight: '600',
+              borderRadius: '12px',
+              padding: '16px',
+              fontSize: '16px',
+              fontWeight: 'bold',
               width: '100%',
               cursor: loading ? 'not-allowed' : 'pointer',
-              marginTop: '10px',
-              opacity: loading ? 0.7 : 1
+              marginTop: '16px',
+              boxShadow: '0 4px 12px rgba(127, 119, 221, 0.3)',
+              transition: '0.2s'
             }}
           >
-            {loading ? 'Processing...' : 'Save & check risk →'}
+            {loading ? 'Analyzing data...' : 'Save & Check PCOD Risk →'}
           </button>
         </form>
       </div>

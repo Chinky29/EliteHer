@@ -22,24 +22,38 @@ const Navbar = () => {
     <nav style={{
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
-      gap: '10px',
-      height: '52px',
+      justifyContent: 'space-between',
+      padding: '0 24px',
+      height: '64px',
       backgroundColor: '#fff',
       borderBottom: '0.5px solid #e8e8e8',
       position: 'sticky',
       top: 0,
       zIndex: 100
     }}>
-      <NavLink to="/" style={({ isActive }) => isActive ? { ...linkStyle, ...activeStyle } : linkStyle}>
-        Log cycle
-      </NavLink>
-      <NavLink to="/result" style={({ isActive }) => isActive ? { ...linkStyle, ...activeStyle } : linkStyle}>
-        Risk check
-      </NavLink>
-      <NavLink to="/dashboard" style={({ isActive }) => isActive ? { ...linkStyle, ...activeStyle } : linkStyle}>
-        Dashboard
-      </NavLink>
+      <div style={{ 
+        fontSize: '20px', 
+        fontWeight: 'bold', 
+        color: '#7F77DD',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px'
+      }}>
+        <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: '#7F77DD' }}></div>
+        EliteHer
+      </div>
+
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <NavLink to="/" style={({ isActive }) => isActive ? { ...linkStyle, ...activeStyle } : linkStyle}>
+          Dashboard
+        </NavLink>
+        <NavLink to="/log" style={({ isActive }) => isActive ? { ...linkStyle, ...activeStyle } : linkStyle}>
+          Log cycle
+        </NavLink>
+        <NavLink to="/result" style={({ isActive }) => isActive ? { ...linkStyle, ...activeStyle } : linkStyle}>
+          Risk check
+        </NavLink>
+      </div>
     </nav>
   );
 };
