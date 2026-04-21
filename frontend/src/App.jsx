@@ -1,7 +1,7 @@
-// This is the main component that sets up the layout and routing for the entire application.
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { theme } from './styles/theme';
 
 // Import Pages
 import LogCycle from './pages/LogCycle';
@@ -16,21 +16,20 @@ const App = () => {
     <Router>
       <div style={{
         minHeight: '100vh',
-        backgroundColor: '#f9f9f9',
-        fontFamily: 'system-ui, -apple-system, sans-serif'
+        backgroundColor: theme.bg,
+        fontFamily: "'Inter', system-ui, sans-serif"
       }}>
         <Toaster position="top-center" />
         
         <div style={{
-          maxWidth: '800px',
+          maxWidth: '720px',
           margin: '0 auto',
-          backgroundColor: '#fff',
           minHeight: '100vh',
-          boxShadow: '0 0 20px rgba(0,0,0,0.05)'
+          backgroundColor: 'transparent'
         }}>
           <Navbar />
           
-          <main>
+          <main className="page-container">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/log" element={<LogCycle />} />
