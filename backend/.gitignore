@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+ENV/
+env/
+.venv/
+pcod_data.csv
+model/*.pkl
