@@ -1,12 +1,10 @@
 // This file displays the PCOD risk prediction results received from the ML model.
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { theme } from '../styles/theme';
 
-const RiskResult = () => {
-  const location = useLocation();
+const RiskResult = ({ result }) => {
   const navigate = useNavigate();
-  const result = location.state?.result;
   const [animatedConfidence, setAnimatedConfidence] = useState(0);
 
   useEffect(() => {
@@ -211,24 +209,39 @@ const RiskResult = () => {
         <p style={{ margin: '0 0 16px 0', fontSize: '13px', color: theme.textSecondary }}>
           This result has been saved to your history. View your dashboard to track changes over time.
         </p>
-        <button 
-          onClick={() => navigate('/')}
-          style={{
-            background: 'transparent',
-            color: theme.purple,
-            border: `1.5px solid ${theme.purple}`,
-            borderRadius: '12px',
-            padding: '12px 24px',
-            fontSize: '15px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            transition: '0.2s'
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = theme.purpleLight}
-          onMouseOut={(e) => e.target.style.backgroundColor = 'transparent'}
-        >
-          View Dashboard →
-        </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <button 
+            onClick={() => navigate('/')}
+            style={{
+              background: theme.purple,
+              color: 'white',
+              border: 'none',
+              borderRadius: '12px',
+              padding: '12px 24px',
+              fontSize: '15px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: '0.2s',
+              boxShadow: theme.shadow
+            }}
+          >
+            View Dashboard →
+          </button>
+          <button 
+            onClick={() => navigate('/log')}
+            style={{ 
+              background: 'transparent',
+              color: theme.textSecondary,
+              border: '0.5px solid #ddd',
+              borderRadius: '12px',
+              padding: '11px',
+              fontSize: '14px',
+              cursor: 'pointer'
+            }}
+          >
+            Log another cycle
+          </button>
+        </div>
       </div>
     </div>
   );

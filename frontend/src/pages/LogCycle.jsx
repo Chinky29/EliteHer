@@ -2,31 +2,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { logCycle, predictRisk } from '../api/api';
+import { logCycle, predictRisk, getCycles } from '../api/api';
 import { theme } from '../styles/theme';
 
-const LogCycle = () => {
+const LogCycle = ({ form, setForm, setRiskResult, setCycleHistory, setInsights }) => {
   const navigate = useNavigate();
   
-  // useState is a React Hook that lets you add state to functional components.
+  // useState is only used for the local loading status
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    start_date: '',
-    end_date: '',
-    prev_start: '',
-    flow_intensity: 2,
-    acne_score: 0,
-    stress_level: 0,
-    mood_swings: 0,
-    weight_gain: 0,
-    hair_loss: 0,
-    age: ''
-  });
 
-  // The form handler updates the formData state whenever a user types in an input field.
+  // The form handler updates the shared state from App.jsx
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setForm(prev => ({
       ...prev,
       [name]: value
     }));
@@ -39,13 +27,13 @@ const LogCycle = () => {
 
     try {
       // 1. Log the cycle data
-      await logCycle(formData);
+      await logCycle(form);
 
       // 2. Prepare data for ML prediction
       let cycleLength = 28;
-      if (formData.prev_start && formData.start_date) {
-        const d1 = new Date(formData.prev_start);
-        const d2 = new Date(formData.start_date);
+      if (form.prev_start && form.start_date) {
+        const d1 = new Date(form.prev_start);
+        const d2 = new Date(form.start_date);
         cycleLength = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
       }
       
@@ -54,25 +42,36 @@ const LogCycle = () => {
       const predData = {
         cycle_length: cycleLength,
         gap_variation: gapVariation,
-        flow_intensity: parseInt(formData.flow_intensity),
-        acne_score: parseInt(formData.acne_score),
-        stress_level: parseInt(formData.stress_level),
-        weight_gain: parseFloat(formData.weight_gain),
-        mood_swings: parseInt(formData.mood_swings),
-        hair_loss: parseInt(formData.hair_loss),
-        age: parseInt(formData.age)
+        flow_intensity: parseInt(form.flow_intensity),
+        acne_score: parseInt(form.acne_score),
+        stress_level: parseInt(form.stress_level),
+        weight_gain: parseFloat(form.weight_gain),
+        mood_swings: parseInt(form.mood_swings),
+        hair_loss: parseInt(form.hair_loss),
+        age: parseInt(form.age)
       };
 
       // 3. Get prediction from ML model
       const res = await predictRisk(predData);
       
+      // Save result to global state
+      setRiskResult(res.data);
+
+      // Refresh cycle history for Dashboard
+      const historyRes = await getCycles();
+      setCycleHistory(historyRes.data.cycles || []);
+
+      // Clear cached insights to force refresh on next visit
+      setInsights(null);
+      
       toast.success('Cycle logged!');
       
-      // Navigate to results page passing the prediction data
-      navigate('/result', { state: { result: res.data } });
+      // Navigate to results page
+      navigate('/result');
     } catch (error) {
       console.error(error);
-      toast.error('Something went wrong — is the backend running?');
+      const msg = error.response?.data?.error || 'Something went wrong — check your database connection.';
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
@@ -144,6 +143,7 @@ const LogCycle = () => {
                 type="date" 
                 name="start_date" 
                 required 
+                value={form.start_date}
                 style={inputStyle} 
                 onChange={handleChange}
                 className="custom-input"
@@ -155,6 +155,7 @@ const LogCycle = () => {
                 type="date" 
                 name="end_date" 
                 required 
+                value={form.end_date}
                 style={inputStyle} 
                 onChange={handleChange}
                 className="custom-input"
@@ -167,6 +168,7 @@ const LogCycle = () => {
             <input 
               type="date" 
               name="prev_start" 
+              value={form.prev_start}
               style={inputStyle} 
               onChange={handleChange}
               className="custom-input"
@@ -190,7 +192,7 @@ const LogCycle = () => {
                 max="4" 
                 style={inputStyle} 
                 onChange={handleChange} 
-                value={formData.flow_intensity}
+                value={form.flow_intensity}
                 className="custom-input"
               />
               <span style={helperStyle}>1=light, 4=very heavy</span>
@@ -201,6 +203,7 @@ const LogCycle = () => {
                 type="number" 
                 name="age" 
                 required 
+                value={form.age}
                 style={inputStyle} 
                 onChange={handleChange}
                 className="custom-input"
@@ -219,7 +222,7 @@ const LogCycle = () => {
                 max="10" 
                 style={inputStyle} 
                 onChange={handleChange} 
-                value={formData.acne_score}
+                value={form.acne_score}
                 className="custom-input"
               />
               <span style={helperStyle}>0=none, 10=severe</span>
@@ -233,7 +236,7 @@ const LogCycle = () => {
                 max="10" 
                 style={inputStyle} 
                 onChange={handleChange} 
-                value={formData.stress_level}
+                value={form.stress_level}
                 className="custom-input"
               />
               <span style={helperStyle}>0=none, 10=extreme</span>
@@ -250,7 +253,7 @@ const LogCycle = () => {
                 max="10" 
                 style={inputStyle} 
                 onChange={handleChange} 
-                value={formData.mood_swings}
+                value={form.mood_swings}
                 className="custom-input"
               />
               <span style={helperStyle}>0=none, 10=severe</span>
@@ -264,7 +267,7 @@ const LogCycle = () => {
                 max="5" 
                 style={inputStyle} 
                 onChange={handleChange} 
-                value={formData.hair_loss}
+                value={form.hair_loss}
                 className="custom-input"
               />
               <span style={helperStyle}>0=none, 5=severe</span>
@@ -281,7 +284,7 @@ const LogCycle = () => {
               step="0.1" 
               style={inputStyle} 
               onChange={handleChange} 
-              value={formData.weight_gain}
+              value={form.weight_gain}
               className="custom-input"
             />
             <span style={helperStyle}>Total weight gain in the last 6 months</span>

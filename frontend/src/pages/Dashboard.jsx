@@ -6,22 +6,23 @@ import { getCycles, getInsights } from '../api/api';
 import AlertBanner from '../components/AlertBanner';
 import { theme } from '../styles/theme';
 
-const Dashboard = () => {
+const Dashboard = ({ insights, setInsights, cycleHistory, setCycleHistory }) => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({ cycles: [], insights: null });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // Only fetch if we don't already have the data
+    if (insights && cycleHistory && cycleHistory.length > 0) return;
+
     const fetchData = async () => {
+      setLoading(true);
       try {
         const [cyclesRes, insightsRes] = await Promise.all([
           getCycles(),
           getInsights()
         ]);
-        setData({
-          cycles: cyclesRes.data.cycles,
-          insights: insightsRes.data
-        });
+        setCycleHistory(cyclesRes.data.cycles || []);
+        setInsights(insightsRes.data);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
       } finally {
@@ -30,7 +31,7 @@ const Dashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [insights, cycleHistory, setCycleHistory, setInsights]);
 
   if (loading) {
     return (
@@ -40,11 +41,9 @@ const Dashboard = () => {
     );
   }
 
-  const { cycles, insights } = data;
-  
   // Prepare chart data
-  const lineData = insights?.cycle_lengths.map((len, idx) => ({
-    date: insights.start_dates[idx].split('-').slice(1).join('/'), // Month/Day
+  const lineData = insights?.cycle_trend?.lengths.map((len, idx) => ({
+    date: insights.cycle_trend.dates[idx].split('-').slice(1).join('/'), // Month/Day
     length: len
   })) || [];
 
@@ -125,7 +124,7 @@ const Dashboard = () => {
             <line x1="3" y1="10" x2="21" y2="10"></line>
           </svg>
           <div style={labelStyle}>Total Cycles</div>
-          <div style={valueStyle(theme.purple)}>{cycles.length}</div>
+          <div style={valueStyle(theme.purple)}>{cycleHistory?.length || 0}</div>
         </div>
         <div style={statCardStyle(theme.teal, 0.08)}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={theme.textSecondary} strokeWidth="2" style={{ marginBottom: '12px' }}>
@@ -133,7 +132,7 @@ const Dashboard = () => {
             <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
           <div style={labelStyle}>Avg Length</div>
-          <div style={valueStyle(theme.teal)}>{insights?.avg_cycle_length || 0}d</div>
+          <div style={valueStyle(theme.teal)}>{insights?.avg_cycle_len || 0}d</div>
         </div>
         <div style={statCardStyle(theme.amber, 0.16)}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={theme.textSecondary} strokeWidth="2" style={{ marginBottom: '12px' }}>
@@ -233,9 +232,9 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {cycles.map((c, i) => (
+              {cycleHistory?.map((c, i) => (
                 <tr key={i} className="table-row-hover" style={{ 
-                  borderBottom: i === cycles.length - 1 ? 'none' : '1px solid #f9f9f9',
+                  borderBottom: i === cycleHistory.length - 1 ? 'none' : '1px solid #f9f9f9',
                   transition: '0.15s'
                 }}>
                   <td style={{ padding: '14px 16px', fontWeight: '600', color: theme.textPrimary }}>{c.start_date}</td>
@@ -267,7 +266,7 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
-          {cycles.length === 0 && (
+          {(!cycleHistory || cycleHistory.length === 0) && (
             <div style={{ textAlign: 'center', padding: '40px 20px' }}>
               <p style={{ color: theme.textSecondary, marginBottom: '20px' }}>No cycles logged yet.</p>
               <button 

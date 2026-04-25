@@ -29,43 +29,46 @@ def predict():
     data = request.json
     
     # Required feature fields
-    required_fields = [
+    FEATURES = [
         "cycle_length", "gap_variation", "flow_intensity", "acne_score",
         "stress_level", "weight_gain", "mood_swings", "hair_loss", "age"
     ]
     
-    missing = [f for f in required_fields if f not in data]
+    missing = [f for f in FEATURES if f not in data]
     if missing:
         return jsonify({"error": "Missing fields", "missing": missing}), 400
         
     # Prepare input for prediction
-    features = [data[f] for f in required_fields]
+    features = [data[f] for f in FEATURES]
     features_arr = np.array(features).reshape(1, -1)
     
     # Scale and Predict
-    scaled_features = scaler.transform(features_arr)
-    prediction_idx = model.predict(scaled_features)[0]
-    probabilities = model.predict_proba(scaled_features)[0]
-    
-    risk_level = label_encoder.classes_[prediction_idx]
-    
-    # Map probabilities to classes
-    prob_map = {}
-    for i, cls in enumerate(label_encoder.classes_):
-        prob_map[cls] = round(probabilities[i] * 100, 1)
+    try:
+        scaled_features = scaler.transform(features_arr)
+        prediction_idx = model.predict(scaled_features)[0]
+        probabilities = model.predict_proba(scaled_features)[0]
         
-    confidence = prob_map[risk_level]
-    
-    # Build alert string
-    alert = None
-    if risk_level == "High":
-        alert = "High PCOD risk detected. Please consult a doctor."
-    elif risk_level == "Medium":
-        alert = "Moderate irregularity detected. Monitor your symptoms."
+        risk_level = label_encoder.classes_[prediction_idx]
         
-    return jsonify({
-        "risk_level": risk_level,
-        "confidence": confidence,
-        "alert": alert,
-        "probabilities": prob_map
-    })
+        # Map probabilities to classes
+        prob_map = {}
+        for i, cls in enumerate(label_encoder.classes_):
+            prob_map[cls] = round(probabilities[i] * 100, 1)
+            
+        confidence = prob_map[risk_level]
+        
+        # Build alert string
+        alert = None
+        if risk_level == "High":
+            alert = "High PCOD risk detected. Please consult a doctor."
+        elif risk_level == "Medium":
+            alert = "Moderate irregularity detected. Monitor your symptoms."
+            
+        return jsonify({
+            "risk_level": risk_level,
+            "confidence": confidence,
+            "alert": alert,
+            "probabilities": prob_map
+        })
+    except Exception as e:
+        return jsonify({"error": f"Prediction failed: {e}"}), 500

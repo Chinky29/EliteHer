@@ -8,6 +8,9 @@ cycle_bp = Blueprint('cycle', __name__)
 
 @cycle_bp.route('/log-cycle', methods=['POST'])
 def log_cycle():
+    if cycles_collection is None:
+        return jsonify({"success": False, "error": "Database not connected. Check your MONGO_URI."}), 503
+        
     data = request.json
     
     # Required fields
@@ -26,7 +29,7 @@ def log_cycle():
     age = int(data.get('age', 25))
 
     # Calculate cycle_length (days between prev_start and start_date)
-    cycle_length = 28 # Default if no prev_start
+    cycle_length = None # Default if no prev_start
     if prev_start:
         try:
             d1 = datetime.strptime(prev_start, '%Y-%m-%d')
@@ -58,6 +61,9 @@ def log_cycle():
 
 @cycle_bp.route('/cycles/<user_id>', methods=['GET'])
 def get_cycles(user_id):
+    if cycles_collection is None:
+        return jsonify({"cycles": [], "count": 0, "error": "Database not connected"}), 503
+        
     # Fetch last 12 cycles sorted by start_date descending
     cycles = list(cycles_collection.find(
         {"user_id": user_id},
