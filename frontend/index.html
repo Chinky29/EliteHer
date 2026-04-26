@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CycleAI — Smart Period Tracking & PCOD Risk Prediction</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Syne (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    /* Hide all sections except hero initially */
+    #problem, #users, #limitations, #approach, #features, #dashboard {
+      display: none;
+    }
+    #problem.show, #users.show, #limitations.show, #approach.show, #features.show, #dashboard.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-dot"></span>CycleAI
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#problem">Problem</a></li>
+        <li><a href="#users">Who We Help</a></li>
+        <li><a href="#limitations">Limitations</a></li>
+        <li><a href="#approach">Our Approach</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+      </ul>
+      <a href="#dashboard" class="btn-nav">Track Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================ -->
+  <section id="hero">
+    <!-- Animated background grid -->
+    <div class="hero-grid"></div>
+    <!-- Glowing orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-content">
+      <span class="hero-badge">AI-Powered Women's Health</span>
+      <h1 class="hero-title">
+        Smart Period Tracking<br />
+        <span class="gradient-text">&amp; PCOD Risk Prediction</span>
+      </h1>
+      <p class="hero-sub">
+        An intelligent health assistant that learns your cycle, detects PCOD risk early,
+        and delivers personalised insights — so you stay ahead of your health.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#dashboard" class="btn-primary pulse-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Track Now
+        </a>
+        <a href="#features" class="btn-ghost">Explore Features →</a>
+      </div>
+      <!-- Quick stats strip -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">1 in 5</span>
+          <span class="stat-label">Women affected by PCOD</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">70%</span>
+          <span class="stat-label">Cases go undiagnosed</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">~2 yrs</span>
+          <span class="stat-label">Average diagnosis delay</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating visual card -->
+    <div class="hero-visual">
+      <div class="hv-card">
+        <div class="hv-header">
+          <span class="hv-dot green"></span>
+          <span class="hv-dot yellow"></span>
+          <span class="hv-dot red"></span>
+          <span class="hv-title">Risk Monitor</span>
+        </div>
+        <div class="hv-risk-ring">
+          <svg viewBox="0 0 120 120" class="ring-svg">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="10"/>
+            <circle cx="60" cy="60" r="50" fill="none" stroke="url(#ringGrad)" stroke-width="10"
+              stroke-linecap="round" stroke-dasharray="220 314" stroke-dashoffset="-30"/>
+            <defs>
+              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff6b9d"/>
+                <stop offset="100%" stop-color="#c44dff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="ring-inner">
+            <span class="ring-score">42%</span>
+            <span class="ring-label">Risk Score</span>
+          </div>
+        </div>
+        <div class="hv-chips">
+          <span class="chip chip-warn">Irregular Cycle</span>
+          <span class="chip chip-ok">Hormones Normal</span>
+          <span class="chip chip-warn">Mild Acne</span>
+        </div>
+        <div class="hv-next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ff6b9d" stroke-width="2"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+          Next cycle: <strong>Jun 14</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROBLEM SECTION
+  ============================================================ -->
+  <section id="problem" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">The Problem</span>
+        <h2>Silent Struggles Women Face</h2>
+        <p>Millions of women suffer from cycle-related disorders that go unnoticed until it's too late.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card" data-delay="0">
+          <div class="pc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Irregular Cycles</h3>
+          <p>Unpredictable periods cause anxiety, disrupt planning, and mask underlying hormonal disorders that compound over time.</p>
+          <div class="pc-stat">Affects 30–40% of women</div>
+        </div>
+        <div class="problem-card" data-delay="100">
+          <div class="pc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          </div>
+          <h3>Missed PCOD Warnings</h3>
+          <p>Early PCOD signs like acne, weight gain, and cycle shifts are dismissed as stress—leading to late-stage diagnosis.</p>
+          <div class="pc-stat">70% cases undiagnosed</div>
+        </div>
+        <div class="problem-card" data-delay="200">
+          <div class="pc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h4"/></svg>
+          </div>
+          <h3>No Continuous Monitoring</h3>
+          <p>Existing apps offer basic period logging without intelligent pattern analysis, missing critical longitudinal health signals.</p>
+          <div class="pc-stat">Most apps lack AI analysis</div>
+        </div>
+        <div class="problem-card" data-delay="300">
+          <div class="pc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.08 4.18 2 2 0 015 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <h3>Delayed Consultation</h3>
+          <p>Without risk-level signals, women delay seeing a doctor, and doctors lack longitudinal data to make accurate diagnoses.</p>
+          <div class="pc-stat">Avg. 2-year diagnosis delay</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       AFFECTED USERS SECTION
+  ============================================================ -->
+  <section id="users" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Who We Help</span>
+        <h2>Built for Every Woman</h2>
+        <p>Our system is designed to serve diverse needs across age groups and lifestyles.</p>
+      </div>
+      <div class="users-grid">
+        <div class="user-card" data-delay="0">
+          <div class="uc-avatar uc-teen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Teenage Girls</h3>
+          <p>Early onset of irregular cycles during puberty creates confusion. Our system provides guidance and reassurance.</p>
+          <div class="uc-badge">Early Awareness</div>
+        </div>
+        <div class="user-card" data-delay="100">
+          <div class="uc-avatar uc-risk">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v4M12 16h.01"/></svg>
+          </div>
+          <h3>Women at PCOD Risk</h3>
+          <p>Those with family history or early symptoms benefit from continuous AI-powered risk monitoring and alerts.</p>
+          <div class="uc-badge">Risk Monitoring</div>
+        </div>
+        <div class="user-card" data-delay="200">
+          <div class="uc-avatar uc-work">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          </div>
+          <h3>Working Women</h3>
+          <p>Busy schedules mean health often takes a back seat. Quick symptom logs and smart reminders fit seamlessly into daily life.</p>
+          <div class="uc-badge">Time-Efficient</div>
+        </div>
+        <div class="user-card" data-delay="300">
+          <div class="uc-avatar uc-doc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V8l-5-5H9z"/><path d="M9 3v5h6M12 11v6M9 14h6"/></svg>
+          </div>
+          <h3>Doctors &amp; Clinicians</h3>
+          <p>Access longitudinal patient data, trend reports, and risk scores to make faster, evidence-based clinical decisions.</p>
+          <div class="uc-badge">Clinical Insights</div>
+        </div>
+      </div>
+
+      <!-- Stats band -->
+      <div class="stats-band">
+        <div class="sb-item">
+          <span class="sb-num">1 in 5</span>
+          <span class="sb-text">women globally have PCOD</span>
+        </div>
+        <div class="sb-item">
+          <span class="sb-num">~200M</span>
+          <span class="sb-text">women affected worldwide</span>
+        </div>
+        <div class="sb-item">
+          <span class="sb-num">70%</span>
+          <span class="sb-text">remain undiagnosed</span>
+        </div>
+        <div class="sb-item">
+          <span class="sb-num">2 yrs</span>
+          <span class="sb-text">average time to diagnosis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CURRENT LIMITATIONS SECTION
+  ============================================================ -->
+  <section id="limitations" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Current Gaps</span>
+        <h2>What Existing Solutions Fail At</h2>
+        <p>Today's period tracking apps are reactive, generic, and clinically hollow.</p>
+      </div>
+      <div class="limits-grid">
+        <div class="limit-card" data-delay="0">
+          <div class="lc-icon red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </div>
+          <h3>Static Predictions</h3>
+          <p>Fixed 28-day cycle assumptions that ignore your unique biological rhythm and lifestyle factors.</p>
+        </div>
+        <div class="limit-card" data-delay="100">
+          <div class="lc-icon red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3>No PCOD Detection</h3>
+          <p>Zero capability to analyse symptom clusters and cycle patterns for early PCOD risk identification.</p>
+        </div>
+        <div class="limit-card" data-delay="200">
+          <div class="lc-icon red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3>Generic Insights</h3>
+          <p>One-size-fits-all advice that ignores your health history, age, symptoms, and individual patterns.</p>
+        </div>
+        <div class="limit-card" data-delay="300">
+          <div class="lc-icon red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <h3>No Personalisation</h3>
+          <p>Apps don't learn or adapt. They don't build a model of your health and improve recommendations over time.</p>
+        </div>
+        <div class="limit-card" data-delay="400">
+          <div class="lc-icon red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <h3>No Doctor Integration</h3>
+          <p>Clinicians have no access to historical data, making each consultation start from scratch with incomplete information.</p>
+        </div>
+        <div class="limit-card" data-delay="500">
+          <div class="lc-icon red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 17H2a3 3 0 000 6h20a3 3 0 000-6z"/><path d="M6 17V3a1 1 0 011-1h4a1 1 0 011 1v3h4a1 1 0 011 1v10"/></svg>
+          </div>
+          <h3>No Early Warnings</h3>
+          <p>Reactive instead of proactive — alerts come too late or not at all, missing crucial intervention windows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY OUR APPROACH — COMPARISON TABLE
+  ============================================================ -->
+  <section id="approach" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our Approach</span>
+        <h2>Why CycleAI Is Different</h2>
+        <p>A head-to-head comparison — see exactly what sets us apart.</p>
+      </div>
+      <div class="compare-wrap">
+        <div class="compare-table-wrapper">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th class="col-existing">Existing Apps</th>
+                <th class="col-ours">CycleAI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cycle Prediction</td>
+                <td><span class="badge badge-partial">Basic (Fixed 28-day)</span></td>
+                <td><span class="badge badge-yes">✓ AI-adaptive model</span></td>
+              </tr>
+              <tr>
+                <td>PCOD Detection</td>
+                <td><span class="badge badge-no">✗ Not available</span></td>
+                <td><span class="badge badge-yes">✓ Multi-symptom analysis</span></td>
+              </tr>
+              <tr>
+                <td>Personalisation</td>
+                <td><span class="badge badge-no">✗ Generic only</span></td>
+                <td><span class="badge badge-yes">✓ User-specific insights</span></td>
+              </tr>
+              <tr>
+                <td>Learning Ability</td>
+                <td><span class="badge badge-no">✗ Static rules</span></td>
+                <td><span class="badge badge-yes">✓ Improves with data</span></td>
+              </tr>
+              <tr>
+                <td>Early Warning System</td>
+                <td><span class="badge badge-no">✗ None</span></td>
+                <td><span class="badge badge-yes">✓ Proactive risk alerts</span></td>
+              </tr>
+              <tr>
+                <td>Doctor-Friendly Reports</td>
+                <td><span class="badge badge-no">✗ Not available</span></td>
+                <td><span class="badge badge-yes">✓ Exportable summaries</span></td>
+              </tr>
+              <tr>
+                <td>Symptom Tracking</td>
+                <td><span class="badge badge-partial">Basic (mood only)</span></td>
+                <td><span class="badge badge-yes">✓ 15+ symptom inputs</span></td>
+              </tr>
+              <tr>
+                <td>Risk Score</td>
+                <td><span class="badge badge-no">✗ Not available</span></td>
+                <td><span class="badge badge-yes">✓ Low / Medium / High</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURES SECTION
+  ============================================================ -->
+  <section id="features" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Features</span>
+        <h2>Everything Your Health Needs</h2>
+        <p>An integrated suite of intelligent tools built around your cycle.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fc-wide" data-delay="0">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+          </div>
+          <h3>Smart Cycle Tracker</h3>
+          <p>Log period dates, flow intensity, and symptoms. Our AI learns your unique cycle and predicts with increasing accuracy over time.</p>
+          <ul class="feat-list">
+            <li>Auto-learns cycle length</li>
+            <li>Fertility window prediction</li>
+            <li>Flow intensity heatmap</li>
+          </ul>
+        </div>
+
+        <div class="feature-card" data-delay="100">
+          <div class="feat-icon fc-pink">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3>PCOD Risk Score</h3>
+          <p>Continuous multi-factor risk assessment displayed as Low / Medium / High with actionable next steps.</p>
+        </div>
+
+        <div class="feature-card" data-delay="200">
+          <div class="feat-icon fc-purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3>Personalised Insights</h3>
+          <p>AI-generated health tips, diet suggestions, and activity recommendations that evolve with your data.</p>
+        </div>
+
+        <div class="feature-card" data-delay="300">
+          <div class="feat-icon fc-teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          </div>
+          <h3>Symptom-Based Analysis</h3>
+          <p>Track 15+ symptoms including acne, bloating, mood, hair loss, and weight changes. Patterns reveal deeper health signals.</p>
+        </div>
+
+        <div class="feature-card fc-wide" data-delay="400">
+          <div class="feat-icon fc-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <h3>Early Warning System</h3>
+          <p>Proactive alerts when anomalies are detected — extended cycles, unusual symptom clusters, or rising risk scores. Never miss a warning sign again.</p>
+          <ul class="feat-list">
+            <li>Threshold-based alerts</li>
+            <li>Consult-recommended triggers</li>
+            <li>Doctor report generation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DASHBOARD / INTERACTIVE SECTION
+  ============================================================ -->
+  <section id="dashboard" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Live Dashboard</span>
+        <h2>Your Health, At a Glance</h2>
+        <p>Log your cycle, view trends, and get your PCOD risk score — all in one place.</p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="dash-tabs">
+        <button class="dash-tab active" data-tab="log">📝 Log Cycle</button>
+        <button class="dash-tab" data-tab="calendar">📅 Calendar</button>
+        <button class="dash-tab" data-tab="risk">🔬 Risk Score</button>
+        <button class="dash-tab" data-tab="trend">📈 Trend Chart</button>
+        <button class="dash-tab" data-tab="notifications">🔔 Alerts</button>
+      </div>
+
+      <!-- ---- TAB: LOG CYCLE ---- -->
+      <div class="dash-panel active" id="tab-log">
+        <div class="log-form-wrap">
+          <div class="log-form">
+            <h3>Log Your Cycle</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Age</label>
+                <input type="number" id="userAge" class="form-input" placeholder="e.g. 25" min="10" max="60" />
+              </div>
+              <div class="form-group">
+                <label>Period Start Date</label>
+                <input type="date" id="startDate" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>Period End Date</label>
+                <input type="date" id="endDate" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>Flow Intensity</label>
+                <select id="flowIntensity" class="form-input">
+                  <option value="">Select...</option>
+                  <option value="light">Light</option>
+                  <option value="moderate">Moderate</option>
+                  <option value="heavy">Heavy</option>
+                  <option value="very-heavy">Very Heavy</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Cycle Length (days)</label>
+                <input type="number" id="cycleLength" class="form-input" placeholder="e.g. 28" min="20" max="45" />
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <label>Symptoms (select all that apply)</label>
+              <div class="symptom-chips" id="symptomChips">
+                <button class="symp-chip" data-sym="cramps">Cramps</button>
+                <button class="symp-chip" data-sym="bloating">Bloating</button>
+                <button class="symp-chip" data-sym="acne">Acne</button>
+                <button class="symp-chip" data-sym="mood-swings">Mood Swings</button>
+                <button class="symp-chip" data-sym="fatigue">Fatigue</button>
+                <button class="symp-chip" data-sym="headache">Headache</button>
+                <button class="symp-chip" data-sym="hair-loss">Hair Loss</button>
+                <button class="symp-chip" data-sym="weight-gain">Weight Gain</button>
+                <button class="symp-chip" data-sym="insomnia">Insomnia</button>
+                <button class="symp-chip" data-sym="nausea">Nausea</button>
+                <button class="symp-chip" data-sym="breast-tender">Breast Tenderness</button>
+                <button class="symp-chip" data-sym="back-pain">Back Pain</button>
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <label>Notes</label>
+              <textarea id="cycleNotes" class="form-input" rows="3" placeholder="Any additional observations..."></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn-primary" id="logCycleBtn">Save Log Entry</button>
+              <button class="btn-ghost" id="clearFormBtn">Clear</button>
+            </div>
+          </div>
+
+          <!-- Recent Logs -->
+          <div class="recent-logs">
+            <h3>Recent Logs</h3>
+            <div id="logList" class="log-list">
+              <div class="log-empty">No logs yet. Start tracking above!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- TAB: CALENDAR ---- -->
+      <div class="dash-panel" id="tab-calendar">
+        <div class="calendar-wrap">
+          <div class="cal-header">
+            <button id="calPrev" class="cal-nav-btn">‹</button>
+            <h3 id="calMonthYear">Loading...</h3>
+            <button id="calNext" class="cal-nav-btn">›</button>
+          </div>
+          <div class="cal-legend">
+            <span class="leg-item"><span class="leg-dot period"></span>Period</span>
+            <span class="leg-item"><span class="leg-dot predicted"></span>Predicted</span>
+            <span class="leg-item"><span class="leg-dot fertile"></span>Fertile Window</span>
+            <span class="leg-item"><span class="leg-dot today"></span>Today</span>
+          </div>
+          <div class="cal-grid" id="calGrid">
+            <!-- JS will render this -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- TAB: RISK SCORE ---- -->
+      <div class="dash-panel" id="tab-risk">
+        <div class="risk-wrap">
+          <div class="risk-inputs">
+            <h3>PCOD Risk Assessment</h3>
+            <p class="risk-sub">Answer these questions for your personalised risk score.</p>
+            <div class="risk-form">
+              <div class="risk-q">
+                <label>What is your age?</label>
+                <input type="number" id="riskAge" class="form-input" placeholder="e.g. 25" min="10" max="60" style="width: 100px; margin-top: 0.5rem;" />
+              </div>
+              <div class="risk-q">
+                <label>Are your cycles irregular? (&gt;35 days or &lt;21 days)</label>
+                <div class="radio-group">
+                  <label class="radio-opt"><input type="radio" name="irregular" value="2" /> Yes, often</label>
+                  <label class="radio-opt"><input type="radio" name="irregular" value="1" /> Sometimes</label>
+                  <label class="radio-opt"><input type="radio" name="irregular" value="0" /> No</label>
+                </div>
+              </div>
+              <div class="risk-q">
+                <label>Do you experience acne or excess facial/body hair?</label>
+                <div class="radio-group">
+                  <label class="radio-opt"><input type="radio" name="acne" value="2" /> Yes, significant</label>
+                  <label class="radio-opt"><input type="radio" name="acne" value="1" /> Mild</label>
+                  <label class="radio-opt"><input type="radio" name="acne" value="0" /> No</label>
+                </div>
+              </div>
+              <div class="risk-q">
+                <label>Have you gained weight recently without major diet change?</label>
+                <div class="radio-group">
+                  <label class="radio-opt"><input type="radio" name="weight" value="2" /> Yes, significant</label>
+                  <label class="radio-opt"><input type="radio" name="weight" value="1" /> Slightly</label>
+                  <label class="radio-opt"><input type="radio" name="weight" value="0" /> No</label>
+                </div>
+              </div>
+              <div class="risk-q">
+                <label>Family history of PCOD or hormonal disorders?</label>
+                <div class="radio-group">
+                  <label class="radio-opt"><input type="radio" name="family" value="2" /> Yes</label>
+                  <label class="radio-opt"><input type="radio" name="family" value="1" /> Unsure</label>
+                  <label class="radio-opt"><input type="radio" name="family" value="0" /> No</label>
+                </div>
+              </div>
+              <div class="risk-q">
+                <label>Do you experience hair thinning or hair loss?</label>
+                <div class="radio-group">
+                  <label class="radio-opt"><input type="radio" name="hair" value="2" /> Yes, notable</label>
+                  <label class="radio-opt"><input type="radio" name="hair" value="1" /> Mild</label>
+                  <label class="radio-opt"><input type="radio" name="hair" value="0" /> No</label>
+                </div>
+              </div>
+              <button class="btn-primary" id="calcRiskBtn" style="margin-top:1.5rem;">Calculate My Risk</button>
+            </div>
+          </div>
+          <div class="risk-result" id="riskResult">
+            <div class="risk-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="64" height="64"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v4M12 16h.01"/></svg>
+              <p>Complete the assessment<br/>to see your risk score</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- TAB: TREND CHART ---- -->
+      <div class="dash-panel" id="tab-trend">
+        <div class="trend-wrap">
+          <div class="trend-controls">
+            <h3>Cycle Trend Analysis</h3>
+            <div class="trend-demo-notice">📊 Showing sample data — log your cycles to see real trends</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="cycleChart"></canvas>
+          </div>
+          <div class="symptom-freq">
+            <h4>Symptom Frequency</h4>
+            <div id="symptomBars" class="sym-bars"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- TAB: NOTIFICATIONS ---- -->
+      <div class="dash-panel" id="tab-notifications">
+        <div class="notif-wrap">
+          <div class="notif-header">
+            <h3>Smart Alerts &amp; Notifications</h3>
+            <span class="notif-count" id="notifCount">0 active</span>
+          </div>
+          <div id="notifList" class="notif-list">
+            <!-- JS renders notifications -->
+          </div>
+          <button class="btn-ghost" id="addDemoNotif" style="margin-top:1rem;">+ Simulate New Alert</button>
+        </div>
+      </div>
+
+    </div><!-- end container -->
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="nav-logo"><span class="logo-dot"></span>CycleAI</span>
+          <p>AI-powered period tracking and PCOD risk prediction for every woman.</p>
+        </div>
+        <div class="footer-links">
+          <span>Privacy Policy</span>
+          <span>Disclaimer</span>
+          <span>Contact</span>
+        </div>
+        <p class="footer-note">⚠️ This is a frontend prototype for educational/hackathon purposes. Not a substitute for medical advice.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

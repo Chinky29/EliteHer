@@ -11,7 +11,8 @@ ca = certifi.where()
 
 # Connect to MongoDB
 try:
-    client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000, tlsCAFile=ca)
+    # Attempt connection with minimal SSL constraints for development
+    client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000, tls=True, tlsAllowInvalidCertificates=True)
     client.server_info()
     print("MongoDB connected successfully")
     db = client['pcod_db']

@@ -32,6 +32,8 @@ def get_insights(user_id):
     avg_acne = round(sum(c['acne_score'] for c in cycles) / len(cycles), 1) if cycles else 0
     avg_stress = round(sum(c['stress_level'] for c in cycles) / len(cycles), 1) if cycles else 0
     avg_mood = round(sum(c['mood_swings'] for c in cycles) / len(cycles), 1) if cycles else 0
+    avg_weight = round(sum(c.get('weight_gain', 0) for c in cycles) / len(cycles), 1) if cycles else 0
+    avg_hair = round(sum(c.get('hair_loss', 0) for c in cycles) / len(cycles), 1) if cycles else 0
     
     # Notification logic
     notification = None
@@ -53,5 +55,7 @@ def get_insights(user_id):
         "avg_acne": avg_acne,
         "avg_stress": avg_stress,
         "avg_mood": avg_mood,
+        "avg_weight": avg_weight,
+        "avg_hair": avg_hair,
         "notification": notification
     })
