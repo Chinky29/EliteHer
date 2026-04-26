@@ -1,7 +1,7 @@
 {
-  "name": "cycle-ai-frontend",
+  "name": "auracycle-frontend",
   "version": "1.0.0",
-  "description": "Vanilla JS frontend for EliteHer",
+  "description": "Vanilla JS frontend for AuraCycle",
   "scripts": {
     "start": "npx serve ."
   },

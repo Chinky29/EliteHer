@@ -1,4 +1,4 @@
-# This is the main entry point for the Flask backend API.
+# AuraCycle - Main entry point for the Flask backend API.
 from flask import Flask, jsonify
 from flask_cors import CORS
 from routes.cycle import cycle_bp

@@ -1,5 +1,5 @@
 /* ============================================================
-   CycleAI — script.js
+   AuraCycle — script.js
    Vanilla JavaScript — all interactive features
    Integrated with Flask Backend
    ============================================================ */
