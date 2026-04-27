@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # Enable CORS for all /api/* routes
 CORS(app, resources={r"/api/*": {"origins": "*"}})
-CORS(app, origins=["https://auracycle.onrender.com/"])
+CORS(app, origins=["https://auracycle.onrender.com"])
 # Register Blueprints
 app.register_blueprint(cycle_bp, url_prefix='/api')
 app.register_blueprint(predict_bp, url_prefix='/api')
