@@ -6,7 +6,7 @@
 
 "use strict";
 
-const API_BASE_URL = 'https://eliteher-back.onrender.com/api';
+const API_BASE_URL = 'https://auracycle-backend.onrender.com/api';
 const USER_ID = 'demo_user';
 
 async function apiRequest(endpoint, method = 'GET', body = null) {
