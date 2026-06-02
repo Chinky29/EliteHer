@@ -8,13 +8,20 @@ from db import client
 
 app = Flask(__name__)
 
-# Enable CORS for all /api/* routes
-CORS(app, resources={r"/api/*": {"origins": "*"}})
-CORS(app, origins=["https://auracycle.onrender.com"])
-# Register Blueprints
+# Single CORS config — allows both your frontend and local dev
+CORS(app, resources={r"/api/*": {"origins": [
+    "https://auracycle.onrender.com",
+    "http://localhost:3000",
+    "http://localhost:5500"
+]}})
+
 app.register_blueprint(cycle_bp, url_prefix='/api')
 app.register_blueprint(predict_bp, url_prefix='/api')
 app.register_blueprint(insights_bp, url_prefix='/api')
+
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"message": "AuraCycle API is running"})
 
 @app.route('/api/health', methods=['GET'])
 def health():
@@ -26,12 +33,8 @@ def health():
             db_status = "disconnected (client is None)"
     except Exception as e:
         db_status = f"error: {str(e)}"
-        
-    return jsonify({
-        "status": "ok",
-        "database": db_status
-    })
+
+    return jsonify({"status": "ok", "database": db_status})
 
 if __name__ == '__main__':
-    # Run on port 5000 with debug mode enabled, listening on all interfaces
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -8,4 +8,4 @@ ENV/
 env/
 .venv/
 pcod_data.csv
-model/*.pkl
+
