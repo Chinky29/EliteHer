@@ -3,11 +3,20 @@
    Vanilla JavaScript — all interactive features
    Integrated with Flask Backend
    ============================================================ */
+const API_BASE_URL = "https://auracycle-backend.onrender.com/api";
+const USER_ID = 'pcod_user';
 
+// Keep backend alive — ping every 4 minutes
+function keepAlive() {
+  fetch(`${API_BASE_URL}/health`)
+    .then(() => console.log("Backend pinged"))
+    .catch(() => console.log("Backend sleeping..."));
+}
+setInterval(keepAlive, 4 * 60 * 1000); // every 4 minutes
+keepAlive(); // ping immediately on page load
 "use strict";
 
-const API_BASE_URL = "https://auracycle-backend.onrender.com/api";
-const USER_ID = 'demo_user';
+
 
 async function apiRequest(endpoint, method = 'GET', body = null) {
   const options = {
